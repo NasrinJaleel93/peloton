@@ -27,6 +27,7 @@ class UpdateStatement;
 class CopyStatement;
 class AnalyzeStatement;
 class JoinDefinition;
+class CreateFunctionStatement;
 struct TableRef;
 
 class GroupByDescription;
@@ -67,6 +68,7 @@ class SqlNodeVisitor {
   virtual void Visit(const parser::LimitDescription *) {}
 
   virtual void Visit(const parser::CreateStatement *) {}
+  virtual void Visit(const parser::CreateFunctionStatement *) {}
   virtual void Visit(const parser::InsertStatement *) {}
   virtual void Visit(const parser::DeleteStatement *) {}
   virtual void Visit(const parser::DropStatement *) {}

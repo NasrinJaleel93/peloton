@@ -227,6 +227,7 @@ class PostgresParser {
 
   // transform helper for analyze statement
   static parser::AnalyzeStatement* VacuumTransform(VacuumStmt* root);
+  static parser::CreateFunctionStatement* CreateFunctionTransform(CreateFunctionStmt); 
 };
 
 }  // namespace parser

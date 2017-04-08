@@ -112,6 +112,7 @@ void BindNodeVisitor::Visit(const parser::InsertStatement *node) {
   if (node->select != nullptr) node->select->Accept(this);
   context_ = nullptr;
 }
+void BindNodeVisitor::Visit(const parser::CreateFunctionStatement *) {}
 void BindNodeVisitor::Visit(const parser::DropStatement *) {}
 void BindNodeVisitor::Visit(const parser::PrepareStatement *) {}
 void BindNodeVisitor::Visit(const parser::ExecuteStatement *) {}

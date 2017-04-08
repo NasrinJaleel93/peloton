@@ -679,6 +679,7 @@ enum class StatementType {
   TRANSACTION = 13,           // transaction statement type,
   COPY = 14,                  // copy type
   ANALYZE = 15                // analyze type
+  CREATE_FUNC = 18	      // create function type	
 };
 std::string StatementTypeToString(StatementType type);
 StatementType StringToStatementType(const std::string &str);

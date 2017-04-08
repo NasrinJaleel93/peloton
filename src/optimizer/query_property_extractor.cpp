@@ -90,6 +90,7 @@ void QueryPropertyExtractor::Visit(const parser::LimitDescription *limit) {
   property_set_.AddProperty(shared_ptr<PropertyLimit>(
       new PropertyLimit(offset, limit->limit)));
 }
+void QueryPropertyExtractor::Visit(UNUSED_ATTRIBUTE const parser::CreateFunctionStatement *) {}
 
 void QueryPropertyExtractor::Visit(
     UNUSED_ATTRIBUTE const parser::CreateStatement *op) {}
