@@ -734,5 +734,15 @@ TEST_F(PostgresParserTests, DistinctFromTest) {
   delete stmt_list;
 }
 
+TEST_F(PostgresParserTests, CreateFuncTest) {
+  std::string query = "CREATE OR REPLACE FUNCTION increment(i integer) RETURNS integer AS $$   BEGIN  RET  j;  END; $$ LANGUAGE plpgsql;";
+
+  auto parser = parser::PostgresParser::GetInstance();
+  auto stmt_list = parser.BuildParseTree(query).release();
+  EXPECT_TRUE(stmt_list->is_valid);
+ 
+  delete stmt_list;
+}
+
 }  // End test namespace
 }  // End peloton namespace
