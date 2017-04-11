@@ -734,6 +734,7 @@ TEST_F(PostgresParserTests, DistinctFromTest) {
   delete stmt_list;
 }
 
+
 TEST_F(PostgresParserTests, CreateFuncTest) {
   std::string query = "CREATE OR REPLACE FUNCTION increment(i integer) RETURNS integer AS $$   BEGIN  RET  j;  END; $$ LANGUAGE plpgsql;";
 
