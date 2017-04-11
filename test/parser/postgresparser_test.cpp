@@ -747,6 +747,7 @@ TEST_F(PostgresParserTests, CreateDbTest) {
   delete stmt_list;
 }
 
+
 TEST_F(PostgresParserTests, DistinctFromTest) {
   std::string query = "SELECT id, value FROM foo WHERE id IS DISTINCT FROM value;";
 
