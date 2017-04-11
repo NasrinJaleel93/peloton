@@ -1056,8 +1056,6 @@ TEST_F(PostgresParserTests, CaseTest) {
 }
 
 
- 
-
 TEST_F(PostgresParserTests, CreatePGSQLFuncTest) {
   std::string query = "CREATE OR REPLACE FUNCTION increment(i integer) RETURNS integer AS $$   BEGIN  RET  j;  END; $$ LANGUAGE plpgsql;";
 
