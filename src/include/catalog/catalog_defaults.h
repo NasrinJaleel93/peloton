@@ -32,6 +32,7 @@ namespace catalog {
 #define TABLE_CATALOG_NAME "pg_table"
 #define INDEX_CATALOG_NAME "pg_index"
 #define COLUMN_CATALOG_NAME "pg_attribute"
+#define FUNCTION_CATALOG_NAME "pg_proc"
 
 // Local oids from START_OID = 0 to START_OID + OID_OFFSET are reserved
 #define OID_OFFSET 100
@@ -41,6 +42,8 @@ namespace catalog {
 #define TABLE_OID_MASK (static_cast<oid_t>(catalog::CatalogType::TABLE))
 #define INDEX_OID_MASK (static_cast<oid_t>(catalog::CatalogType::INDEX))
 #define TRIGGER_OID_MASK (static_cast<oid_t>(catalog::CatalogType::TRIGGER))
+#define FUNCTION_OID_MASK (static_cast<oid_t>(catalog::CatalogType::FUNCTION))
+
 
 // Reserved pg_catalog database oid
 #define CATALOG_DATABASE_OID (0 | DATABASE_OID_MASK)
@@ -50,6 +53,7 @@ namespace catalog {
 #define TABLE_CATALOG_OID (1 | TABLE_OID_MASK)
 #define INDEX_CATALOG_OID (2 | TABLE_OID_MASK)
 #define COLUMN_CATALOG_OID (3 | TABLE_OID_MASK)
+#define FUNCTION_CATALOG_OID (4 | TABLE_OID_MASK)
 
 // Reserved pg_column index oid
 #define COLUMN_CATALOG_PKEY_OID (0 | INDEX_OID_MASK)
@@ -61,6 +65,10 @@ namespace catalog {
 #define INDEX_CATALOG_SKEY0_OID (4 | INDEX_OID_MASK)
 #define INDEX_CATALOG_SKEY1_OID (5 | INDEX_OID_MASK)
 
+#define FUNCTION_CATALOG_PKEY_OID (6 | INDEX_OID_MASK)
+#define FUNCTION_CATALOG_SKEY0_OID (7 | INDEX_OID_MASK)
+#define FUNCTION_CATALOG_SKEY1_OID (8 | INDEX_OID_MASK)
+
 // Use upper 8 bits indicating catalog type
 #define CATALOG_TYPE_OFFSET 24
 
@@ -71,6 +79,7 @@ enum class CatalogType : uint32_t {
   INDEX = 3 << CATALOG_TYPE_OFFSET,
   COLUMN = 4 << CATALOG_TYPE_OFFSET,
   TRIGGER = 5 << CATALOG_TYPE_OFFSET,
+  FUNCTION = 6 << CATALOG_TYPE_OFFSET
   // To be added
 };
 }
