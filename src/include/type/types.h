@@ -623,6 +623,7 @@ enum class PlanNodeType {
   // Utility
   RESULT = 70,
   COPY = 71,
+  CREATE_FUNC = 72,
 
   // Test
   MOCK = 80
@@ -659,6 +660,13 @@ enum class DropType {
 std::string CreateTypeToString(CreateType type);
 CreateType StringToCreateType(const std::string &str);
 std::ostream &operator<<(std::ostream &os, const CreateType &type);
+// Language Types for UDFs
+//===--------------------------------------------------------------------===//
+
+enum PLType {
+   PL_PGSQL=0,                // UDF language: Pl_PGSQL
+   PL_C=1                     // UDF language: PL_C
+};
 
 //===--------------------------------------------------------------------===//
 // Statement Types
