@@ -14,6 +14,9 @@
 
 // This is just for convenience
 
+#include "create_executor.h"
+#include "create_function_executor.h"
+#include "drop_executor.h"
 #include "executor/aggregate_executor.h"
 #include "executor/aggregator.h"
 #include "executor/analyze_executor.h"
