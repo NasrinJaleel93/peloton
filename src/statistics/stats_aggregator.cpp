@@ -20,6 +20,10 @@
 #include "concurrency/transaction_manager_factory.h"
 #include "storage/storage_manager.h"
 #include "type/ephemeral_pool.h"
+#include "catalog/function_catalog.h"
+#include "catalog/catalog_util.h"
+#include "statistics/backend_stats_context.h"
+#include "statistics/stats_aggregator.h"
 
 namespace peloton {
 namespace stats {

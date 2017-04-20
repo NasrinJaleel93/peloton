@@ -14,6 +14,7 @@
 
 #include "executor/abstract_executor.h"
 #include "catalog/query_metrics_catalog.h"
+#include "catalog/function_catalog.h"
 
 #define COPY_BUFFER_SIZE 65536
 #define INVALID_COL_ID -1
