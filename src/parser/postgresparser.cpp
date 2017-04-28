@@ -1589,14 +1589,6 @@ parser::SQLStatementList* PostgresParser::ParseSQLString(const char* text) {
 
   // DEBUG only. Comment this out in release mode
   // print_pg_parse_tree(result.tree);
-  parser::SQLStatementList* transform_result;
-  try {
-    transform_result = ListTransform(result.tree);
-  } catch (Exception &e) {
-    pg_query_parse_finish(ctx);
-    pg_query_free_parse_result(result);
-    throw e;
-  }
 
   pg_query_parse_finish(ctx);
   pg_query_free_parse_result(result);
