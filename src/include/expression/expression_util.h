@@ -17,6 +17,7 @@
 #include <sstream>
 
 #include "catalog/catalog.h"
+#include "catalog/function_catalog.h"
 #include "catalog/schema.h"
 #include "expression/aggregate_expression.h"
 #include "expression/case_expression.h"
@@ -778,8 +779,10 @@ class ExpressionUtil {
       catch (Exception &e) { 
         auto func_catalog = catalog::FunctionCatalog::GetInstance();
 
-        func_catalog::UDfFunctionData &func_data = 
+        //Do something similar to GetFunction, but populate the struct
+        const catalog::UDFFunctionData &func_data = 
           func_catalog->GetFunction(func_expr->func_name_);
+          
         // Set func_data->func_name to "" if such a function does not exist
 
         if(func_data.func_is_present_) {
