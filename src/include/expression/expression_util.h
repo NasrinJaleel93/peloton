@@ -517,9 +517,9 @@ class ExpressionUtil {
       if (iter != expr_map.end()) aggr_expr->SetValueIdx(iter->second);
     } else if (expr->GetExpressionType() == ExpressionType::FUNCTION) {
       auto func_expr = (expression::FunctionExpression *)expr;
-      // Check and set the function ptr
       auto catalog = catalog::Catalog::GetInstance();
-      const catalog::FunctionData &func_data =
+      try {
+        const catalog::FunctionData &func_data =
           catalog->GetFunction(func_expr->func_name_);
       LOG_INFO("Function %s found in the catalog",
                func_data.func_name_.c_str());
@@ -527,6 +527,12 @@ class ExpressionUtil {
       func_expr->SetFunctionExpressionParameters(func_data.func_ptr_,
                                                  func_data.return_type_,
                                                  func_data.argument_types_);
+      }
+       // If not found in map
+      catch (BuiltinFunctionException &e){
+        LOG_INFO("Function is probably a UDF");
+        func_expr->SetUDFType(true); // Sets is_udf_ to True
+      }
     } else if (expr->GetExpressionType() ==
                ExpressionType::OPERATOR_CASE_EXPR) {
       auto case_expr = reinterpret_cast<expression::CaseExpression *>(expr);
@@ -773,28 +779,18 @@ class ExpressionUtil {
           catalog->GetFunction(func_expr->func_name_);
         func_expr->SetFunctionExpressionParameters(func_data.func_ptr_,
                                                  func_data.return_type_,
-                                                 func_data.argument_types_, false); 
+                                                 func_data.argument_types_); 
       }
       // If not found in map, try in pg_proc (UDF catalog)
       catch (Exception &e) { 
-        auto func_catalog = catalog::FunctionCatalog::GetInstance();
 
-        //Do something similar to GetFunction, but populate the struct
-        const catalog::UDFFunctionData &func_data = 
-          func_catalog->GetFunction(func_expr->func_name_);
-          
-        // Set func_data->func_name to "" if such a function does not exist
+        /* 
+        Assume it is a UDF. Later in Evaluate(), check if it is present inside pg_proc catalog.
+        Since, we need Transaction ID to query from the catalog.
+        */
 
-        if(func_data.func_is_present_) {
-          func_expr->SetFunctionExpressionParameters(func_data.func_string_,
-                                                 func_data.return_type_,
-                                                 func_data.argument_types_, true);
-        }
-        else {
-          throw; // Rethrows the exception since function was not found
-        }
+        func_expr->SetUDFType(true); // Sets is_udf_ to True
       }
-      
     }
 
     // Handle case expressions
