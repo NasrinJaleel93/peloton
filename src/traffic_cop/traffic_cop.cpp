@@ -27,6 +27,7 @@
 #include "type/type.h"
 #include "type/types.h"
 
+
 namespace peloton {
 namespace tcop {
 

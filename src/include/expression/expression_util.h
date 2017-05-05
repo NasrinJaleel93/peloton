@@ -519,6 +519,7 @@ class ExpressionUtil {
       auto func_expr = (expression::FunctionExpression *)expr;
       auto catalog = catalog::Catalog::GetInstance();
       try {
+
         const catalog::FunctionData &func_data =
           catalog->GetFunction(func_expr->func_name_);
       LOG_INFO("Function %s found in the catalog",
@@ -783,6 +784,8 @@ class ExpressionUtil {
       }
       // If not found in map, try in pg_proc (UDF catalog)
       catch (Exception &e) { 
+
+        LOG_INFO("Function is a UDF, maybe");
 
         /* 
         Assume it is a UDF. Later in Evaluate(), check if it is present inside pg_proc catalog.
