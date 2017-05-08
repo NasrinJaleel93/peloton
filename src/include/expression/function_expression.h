@@ -17,6 +17,7 @@
 #include "type/value.h"
 #include "catalog/function_catalog.h"
 #include "udf/udf_main.h"
+#include "common/logger.h"
 
 namespace peloton {
 namespace expression {
@@ -76,6 +77,9 @@ class FunctionExpression : public AbstractExpression {
     type::Value ret;
 
     if(is_udf_) {
+
+      LOG_DEBUG("The function is highly likely a UDF");
+
       // Populate the necessary fields
       auto func_catalog = catalog::FunctionCatalog::GetInstance();
       catalog::UDFFunctionData func_data =
@@ -104,7 +108,7 @@ class FunctionExpression : public AbstractExpression {
         }
       }
       else {
-         throw Exception("function " + func_name_ + " not found.");
+         throw Exception("function " + func_name_ + " not found. in pg_proc");
       }
     }
     else {
