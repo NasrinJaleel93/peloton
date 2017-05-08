@@ -533,6 +533,7 @@ class ExpressionUtil {
       catch (BuiltinFunctionException &e){
         LOG_INFO("Function is probably a UDF");
         func_expr->SetUDFType(true); // Sets is_udf_ to True
+        LOG_DEBUG("IS UDF: %d", (int)func_expr->GetUDFType());
       }
     } else if (expr->GetExpressionType() ==
                ExpressionType::OPERATOR_CASE_EXPR) {
