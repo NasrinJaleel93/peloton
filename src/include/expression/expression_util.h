@@ -518,23 +518,23 @@ class ExpressionUtil {
     } else if (expr->GetExpressionType() == ExpressionType::FUNCTION) {
       auto func_expr = (expression::FunctionExpression *)expr;
       auto catalog = catalog::Catalog::GetInstance();
+     
       try {
-
         const catalog::FunctionData &func_data =
           catalog->GetFunction(func_expr->func_name_);
-      LOG_INFO("Function %s found in the catalog",
-               func_data.func_name_.c_str());
-      LOG_INFO("Argument num: %ld", func_data.argument_types_.size());
-      func_expr->SetFunctionExpressionParameters(func_data.func_ptr_,
+        LOG_INFO("Function %s found in the catalog", func_data.func_name_.c_str());
+        LOG_INFO("Argument num: %ld", func_data.argument_types_.size());
+        func_expr->SetFunctionExpressionParameters(func_data.func_ptr_,
                                                  func_data.return_type_,
                                                  func_data.argument_types_);
-      }
-       // If not found in map
+       }
+       // If not found in map, try in pg_proc (UDF catalog)
       catch (BuiltinFunctionException &e){
+
         LOG_INFO("Function is probably a UDF");
         func_expr->SetUDFType(true); // Sets is_udf_ to True
-        LOG_DEBUG("IS UDF: %d", (int)func_expr->GetUDFType());
-      }
+
+       } 
     } else if (expr->GetExpressionType() ==
                ExpressionType::OPERATOR_CASE_EXPR) {
       auto case_expr = reinterpret_cast<expression::CaseExpression *>(expr);
