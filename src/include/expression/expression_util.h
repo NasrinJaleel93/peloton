@@ -518,7 +518,7 @@ class ExpressionUtil {
     } else if (expr->GetExpressionType() == ExpressionType::FUNCTION) {
       auto func_expr = (expression::FunctionExpression *)expr;
       auto catalog = catalog::Catalog::GetInstance();
-     
+
       try {
         const catalog::FunctionData &func_data =
           catalog->GetFunction(func_expr->func_name_);
@@ -534,7 +534,7 @@ class ExpressionUtil {
         LOG_INFO("Function is probably a UDF");
         func_expr->SetUDFType(true); // Sets is_udf_ to True
 
-       } 
+      } 
     } else if (expr->GetExpressionType() ==
                ExpressionType::OPERATOR_CASE_EXPR) {
       auto case_expr = reinterpret_cast<expression::CaseExpression *>(expr);
