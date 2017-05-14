@@ -73,6 +73,8 @@ SKIP_FILES_LIST = [
     "src/include/index/bwtree.h",
     "src/codegen/util/oa_hash_table.cpp",
     "src/codegen/util/cc_hash_table.cpp"
+    "src/udf/udf_lex.cpp",
+    "src/udf/udf_gram.tab.cpp",
 ]
 
 ## ==============================================
