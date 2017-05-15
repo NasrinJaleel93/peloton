@@ -130,12 +130,6 @@ Catalog::Catalog() : pool_(new type::EphemeralPool()) {
       IndexType::BWTREE, IndexConstraintType::DEFAULT, false,
       std::vector<oid_t>({2}), pool_.get(), txn);
 
-/*   IndexCatalog::GetInstance()->InsertIndex(
-      FUNCTION_CATALOG_PKEY_OID, COLUMN_CATALOG_NAME "_pkey", COLUMN_CATALOG_OID,
-      IndexType::BWTREE, IndexConstraintType::PRIMARY_KEY, true,
-      std::vector<oid_t>({0}), pool_.get(), txn); */
-
-
   // Insert pg_catalog database into pg_database
   pg_database->InsertDatabase(CATALOG_DATABASE_OID, CATALOG_DATABASE_NAME,
                               pool_.get(), txn);
