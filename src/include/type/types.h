@@ -663,7 +663,7 @@ std::ostream &operator<<(std::ostream &os, const CreateType &type);
 // Language Types for UDFs
 //===--------------------------------------------------------------------===//
 
-enum PLType {
+enum class PLType {
    PL_PGSQL=0,                // UDF language: Pl_PGSQL
    PL_C=1                     // UDF language: PL_C
 };
