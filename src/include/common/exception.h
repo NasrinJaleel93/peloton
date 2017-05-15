@@ -56,6 +56,7 @@ enum ExceptionType {
   EXCEPTION_TYPE_CONNECTION = 21,        // connection related
   EXCEPTION_TYPE_SYNTAX = 22,            // syntax related
   EXCEPTION_TYPE_SETTINGS = 23      // settings related
+  EXCEPTION_TYPE_BUILTIN = 24            // builtin function not found
 };
 
 class Exception : public std::runtime_error {
@@ -124,6 +125,8 @@ class Exception : public std::runtime_error {
         return "Syntax";
       case EXCEPTION_TYPE_SETTINGS:
         return "Settings";
+      case EXCEPTION_TYPE_BUILTIN:
+        return "Function"; 
       default:
         return "Unknown";
     }
@@ -437,6 +440,14 @@ class SettingsException : public Exception {
  public:
   SettingsException(std::string msg)
       : Exception(EXCEPTION_TYPE_SETTINGS, msg) {}
+};
+
+class BuiltinFunctionException : public Exception {
+  BuiltinFunctionException() = delete;
+
+  public:
+    BuiltinFunctionException(std::string msg) : Exception(EXCEPTION_TYPE_BUILTIN ,msg){} 
+
 };
 
 }  // namespace peloton
